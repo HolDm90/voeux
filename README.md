@@ -80,6 +80,6 @@ data/
 
 ```bash
 git clone https://github.com/HolDm90/voeux.git
-cd magic-wishes
+cd voeux
 pnpm install
 pnpm dev
