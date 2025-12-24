@@ -2,7 +2,7 @@
 
 import { forwardRef } from "react";
 import { motion } from "framer-motion";
-import { titleFont, bodyFont } from "@/app/layout"; 
+import { titleFont, bodyFont } from "@/lib/fonts";
 import { THEMES, ThemeKey } from "@/lib/themes";
 
 interface GreetingCardProps {
