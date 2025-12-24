@@ -1,5 +1,6 @@
 import { Playfair_Display, Inter } from "next/font/google";
 import "./globals.css";
+import { Analytics } from '@vercel/analytics/react';
 
 // On initialise les polices UNE SEULE FOIS avec les variables CSS
 export const titleFont = Playfair_Display({
@@ -19,6 +20,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="fr" className={`${titleFont.variable} ${bodyFont.variable}`}>
       <body className={`${bodyFont.className} antialiased`}>
         {children}
+        <Analytics />
       </body>
     </html>
   );
