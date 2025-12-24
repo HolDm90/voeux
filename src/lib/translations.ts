@@ -4,10 +4,11 @@ export const translations = {
     buttonView: "Voir ma carte",
     christmasTitle: "Joyeux Noël",
     newyearTitle: "Bonne Année 2026",
+    loading: "Chargement du vœu...",
+    back: "Retour",
     other: "Autre message",
     download: "HD",
     share: "Partager",
-    back: "Retour",
     placeholder: "Ex: Paul"
   },
   en: {
@@ -15,6 +16,7 @@ export const translations = {
     buttonView: "View my card",
     christmasTitle: "Merry Christmas",
     newyearTitle: "Happy New Year 2026",
+    loading: "Loading your wish...",
     other: "Other message",
     download: "HD",
     share: "Share",
