@@ -24,43 +24,46 @@ export default function GreetingManager() {
   const [greeting, setGreeting] = useState<GreetingItem | null>(null);
   const [loading, setLoading] = useState(false);
   const [currentTheme, setCurrentTheme] = useState<ThemeKey>("red");
+  const [isMounted, setIsMounted] = useState(false);
 
-  useEffect(() => {
-    const currentType = getGreetingType();
-    setType(currentType);
-    setCurrentTheme(currentType === "christmas" ? "red" : "blue");
 
-    const urlName = searchParams.get("name");
-    const urlId = searchParams.get("id");
+useEffect(() => {
+  setIsMounted(true); // Indique que nous sommes maintenant côté client
+  
+  const currentType = getGreetingType();
+  setType(currentType);
+  setCurrentTheme(currentType === "christmas" ? "red" : "blue");
 
-    if (urlName) {
-      setName(urlName);
-      
-      // 1. Priorité à l'ID dans l'URL (pour les amis qui reçoivent le lien)
-      // 2. Sinon, vérifier le LocalStorage (pour vous-même)
+  const urlName = searchParams.get("name");
+  const urlId = searchParams.get("id");
+
+  if (urlName) {
+    setName(urlName);
+    
+    // On vérifie d'abord l'ID dans l'URL (priorité absolue pour le partage)
+    if (urlId) {
+      fetchNewMessage(currentType, urlId);
+    } else {
+      // Sinon on regarde le localStorage
       const saved = localStorage.getItem(`greeting_${urlName}_${currentType}`);
-      
-      if (urlId) {
-        // On force le chargement du message spécifique
-        fetchNewMessage(currentType, urlId);
-      } else if (saved) {
+      if (saved) {
         setGreeting(JSON.parse(saved));
       } else {
         fetchNewMessage(currentType);
       }
     }
-  }, [searchParams]);
+  }
+}, [searchParams]);
 
   const fetchNewMessage = async (currentType: "christmas" | "newyear", specificId?: string) => {
     setLoading(true);
     try {
-      // Nous passons l'ID à notre fonction de lib si elle est équipée, 
-      // sinon elle prendra au hasard
       const item = await getRandomGreeting(currentType, specificId);
       setGreeting(item);
       
-      // Sauvegarde locale pour éviter le changement au refresh
-      if (name) {
+      // On ne sauvegarde dans le localStorage QUE si ce n'est pas un lien partagé (pas d'ID imposé)
+      // et qu'on a un nom
+      if (!specificId && name) {
         localStorage.setItem(`greeting_${name}_${currentType}`, JSON.stringify(item));
       }
     } catch (error) {
@@ -69,6 +72,11 @@ export default function GreetingManager() {
       setLoading(false);
     }
   };
+
+
+// Empeche l'affichage tant que le client n'est pas prêt (évite le flash de mauvais vœu)
+if (!isMounted) return null; 
+
 
   const shareCard = async () => {
     if (!greeting || !name) return;

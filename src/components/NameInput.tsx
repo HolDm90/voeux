@@ -32,7 +32,7 @@ export default function NameInput({ onSubmit }: { onSubmit: (name: string) => vo
           Partagez la magie de Noël
         </h2>
         <p className="text-base md:text-lg leading-relaxed max-w-lg mx-auto opacity-80">
-          Utilisez notre IA pour générer un message unique parmi <strong>2000 vœux originaux</strong>. 
+          Utilisez notre bibliothèque de vœux pour générer un message unique parmi <strong>2000 vœux originaux</strong>. 
           Personnalisez, téléchargez et envoyez vos vœux en un instant.
         </p>
       </motion.section>
