@@ -10,10 +10,11 @@ interface GreetingCardProps {
   message: string;
   type: "christmas" | "newyear";
   themeKey: ThemeKey;
+  title: string;
 }
 
 const GreetingCard = forwardRef<HTMLDivElement, GreetingCardProps>(
-  ({ name, message, type, themeKey }, ref) => {
+  ({ name, message, type, themeKey, title }, ref) => {
     const theme = THEMES[themeKey];
     const isChristmas = type === "christmas";
 
@@ -30,7 +31,7 @@ const GreetingCard = forwardRef<HTMLDivElement, GreetingCardProps>(
         
         {/* TITRE DYNAMIQUE */}
         <h1 className={`${titleFont.className} text-4xl text-white mb-4`}>
-          {isChristmas ? "Joyeux Noël" : "Bonne Année 2026"}
+          {title}
         </h1>
 
         {/* PRÉNOM AVEC ACCENT DU THÈME */}
