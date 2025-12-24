@@ -151,7 +151,7 @@ export default function GreetingManager() {
       {/* Bouton Retour élégant */}
       <button 
         onClick={handleBack}
-        className="absolute top-6 left-6 flex items-center gap-2 text-white/60 hover:text-white transition-colors bg-white/5 hover:bg-white/10 px-4 py-2 rounded-full border border-white/10"
+        className="fixed top-4 left-4 z-50 flex items-center gap-2 text-white/70 hover:text-white transition-colors bg-black/20 backdrop-blur-lg px-4 py-2 rounded-full border border-white/10 shadow-lg"
       >
         <ArrowLeft size={16} />
         <span className="text-sm font-medium">{t.back}</span>
