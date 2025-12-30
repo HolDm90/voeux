@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { motion } from "framer-motion";
 import { translations } from "@/lib/translations";
-import Logo from "@/components/Logo"; // Assurez-vous que le fichier existe dans /components
+import Logo from "@/components/Logo"; 
 import { getGreetingType } from "@/lib/getGreetingType";
 
 interface NameInputProps {
